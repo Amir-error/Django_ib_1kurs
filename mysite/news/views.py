@@ -1,15 +1,16 @@
 from django.shortcuts import render, redirect # (redirect- функция переадрисации)
-from .models import Articles
+from .models import Articles 
 
 from django.http import Http404, HttpResponseRedirect
 from django.utils import timezone
 
 # Create your views here.
+#Все новости
 def news_home(request):   # Новости
 	search_news_list = []
 	error = ""
-	if request.method == 'POST':
-		search_news_list = Articles.objects.filter(title__startswith = request.POST['news']) # Поиск
+	if request.method == 'POST':  # реагирует на POST запрос
+		search_news_list = Articles.objects.filter(title__startswith = request.POST['news']) # Поиск новостей
 		search_news_list = search_news_list.order_by('date')	
 		if len(search_news_list) == 0:
 			error = "По вашему запросу ничего не найдено"
@@ -29,7 +30,7 @@ def news_home(request):   # Новости
 	}
 
 	return render(request, 'news/news_home.html', data)
-
+#просмотр отдельной статьи
 def detailview(request, articles_id):
 	try:
 		a = Articles.objects.get(id = articles_id)
@@ -69,7 +70,7 @@ def delete_article(request, articles_id3):
 		raise Http404("Статья не найдена")			
 		
 		
-		
+#Создание статьи		
 def create(request):
 	a = ''
 	if request.method == 'POST':
