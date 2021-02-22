@@ -1,0 +1,22 @@
+{% extends "mainApp/wrapper.html" %}   <!-- Связываем наш html файл с шаблонизоторм -->
+<!-- Название блока важно -->	
+{% block title %} {{ title }} {% endblock %}
+
+{% block content %}
+<b> {{ title }} </b>	 <!-- Передча данных в нащ html для отображения -->
+
+{% for i in values %}
+	{% if i == "Igor" %}
+		{% filter upper %}  <!-- зарезервированный filter 'upper' -->
+			<p>{{ i }}</p>
+		{% endfilter %}
+	{% endif %}
+{% endfor %}
+
+{% for key in obj %}
+	<p>{{key}}</p>
+{% endfor %}
+
+уыно9эзгш49знго9р8ще458щ45не8щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45щ45
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} Редактирование {{ obj.title }} {% endblock %}
+
+{% block content %}
+	<div>
+		<h1 class="a">Редактирование</h1>
+		<form action="{% url 'news:redaction' obj.id obj.id %}" method="POST">
+			{% csrf_token %} <!-- Для безопасной отправки, ОБЯЗАТЕЛЬНО В КАЖДОЙ ФОРМЕ -->
+			<input type="text" name="title" value="{{ obj.title }}" class="form-control" placeholder="Название"><br>
+			<input type="text" name="anons" value="{{ obj.anons }}" class="form-control" placeholder="Анонс" ><br>
+			<input type="text" name="full_text" value="{{ obj.full_text }}" class="form-control" placeholder="Статья"><br>
+			 <!-- !11!!!-->
+
+			<button  class="btn btn-success" type="submit">Редактировать</button>
+		</form>	
+			
+	</div>	 
+{% endblock %}			
+				
+			
+			
+
+			
+
+			
+					
+		

@@ -1,0 +1,24 @@
+body {
+	background: #33ACAC;
+}
+
+aside {
+	float: left;
+	width: 20%;
+	padding: 2.5%;
+	height: 100vh;
+	color: white;
+	border-right: 5px solid #94AC9F;
+	background-color: orange;
+}
+
+form {
+	margin-left: 32%;
+	width: 500px;
+	margin-top: 50px;
+}
+
+/*.btn_reg {
+	margin-top: 54360px;
+}
+*/

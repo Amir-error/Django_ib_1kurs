@@ -1,0 +1,35 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} Новость {% endblock %}
+
+{% block content %}
+	<div>
+		<h4>Новости</h4> 
+		<form action="{% url 'news:news_home' %}" method="POST">
+			{% csrf_token %}
+			<input type="text" name="news" placeholder="Поиск новости" class="form-control">
+			<button  class="btn btn-success" type="submit">Поиск</button>
+		</form>
+		{{ error }}<br>
+		{% if length == 0 %}
+			{% for e in articles_list %}
+				<img src="{{ e.my_photo.url }}"><br>
+				<a href="{% url 'news:detailview' e.id %}">{{ e.title }}</a><br>
+				
+			{% endfor %}
+		{% else %}
+		Результаты по вашему поиску<br>
+			{% for obj in search_news_list %}
+				<a href="{% url 'news:detailview' obj.id %}">{{ obj.title }}</a><br>
+			{% endfor %}
+		{% endif %}		 
+			
+			
+	</div>	
+{% endblock %}			
+		
+			
+					
+		
+
+	

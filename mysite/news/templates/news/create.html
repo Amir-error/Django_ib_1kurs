@@ -1,0 +1,29 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} Создание статьи {% endblock %}
+
+{% block content %}
+	{% if request.user.is_authenticated %}
+	<div>
+		<h1 class="a">Форма</h1>
+		<form action="{% url 'news:create' %}" method="POST">
+			{% csrf_token %} <!-- Для безопасной отправки, ОБЯЗАТЕЛЬНО В КАЖДОЙ ФОРМЕ -->
+			<input type="text" name="title" required="Заполните это поле" class="form-control" placeholder="Название"><br>
+			<input type="text" name="anons" required="" class="form-control" placeholder="Анонс"><br>
+			<input type="text" name="full_text" required="" class="form-control" placeholder="Статья"><br>
+			<input type="file" name="file"><br>
+			
+			{{ error }}<br>
+			{{ a }}<br>
+			
+			<button  class="btn btn-success" type="submit">Добвить статью</button>
+		</form>	
+	</div>	
+	{% else %}
+			<button  class="btn btn-success" type="submit"> <a href="{% url 'login' %}">Авторизация</a></button>
+		 
+	{% endif %}	
+{% endblock %}	
+
+			
+			

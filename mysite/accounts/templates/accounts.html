@@ -1,0 +1,26 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} Аккаунт  {% endblock %}
+
+{% block content %}
+
+{{ request.user }}<br>
+<h1>Мои новости</h1>
+{% for e in our_articles_list %}
+	<a href="{% url 'news:detailview' e.id %}">{{ e.title }}</a><br>
+	{% if access %}
+	<button  style="background-color: orange"><a href="{% url 'news:redaction' e.id e.id %}"> Редактирование</a></button><br> 
+	<button  style="background-color: red"><a href="{% url 'news:delete_article' e.id %}"> Удаление статьи</a></button><br>
+	{% endif %}
+{% endfor %}	
+<h1>Сохры</h1>		
+
+				
+				
+{% endblock %}					 
+				
+
+
+
+
+

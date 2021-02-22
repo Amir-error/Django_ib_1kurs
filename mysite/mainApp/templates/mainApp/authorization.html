@@ -1,0 +1,22 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} Вход {% endblock %}
+
+{% block content %}
+
+	<div>
+		<h1 class="a">Вход</h1>
+		<form action="{% url 'mainApp:authorization' %}" method="POST">
+			{% csrf_token %} <!-- Для безопасной отправки, ОБЯЗАТЕЛЬНО В КАЖДОЙ ФОРМЕ -->
+			<input type="text" name="name"  class="form-control" placeholder="Имя"><br>
+			<input type="password" name="password" class="form-control" placeholder="Пароль"><br>
+			{{ error }}<br>
+			<button class="btn btn-success" type="submit">Вход</button>
+		</form>		
+	</div>	 
+		
+{% endblock %}	
+		
+			
+			
+			

@@ -1,0 +1,13 @@
+<!-- Регистрация -->
+{% extends "mainApp/wrapper.html" %}
+ 
+{% block content %}
+<h2>Sign up</h2>
+<form method="post">
+  {% csrf_token %}
+  <div>
+  	{{ form.as_p }}
+  </div>
+  <button type="submit"> Sign up</button>
+</form>
+{% endblock content %}

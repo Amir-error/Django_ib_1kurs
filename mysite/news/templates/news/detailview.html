@@ -1,0 +1,10 @@
+{% extends "mainApp/wrapper.html" %}  <!-- Можем наследовать из другой папки, п. ч. Django объеденяет templates -->
+
+{% block title %} {{ article.title }}  {% endblock %}
+
+{% block content %}
+
+{{ article.full_text }}<br>
+
+
+{% endblock %}	
