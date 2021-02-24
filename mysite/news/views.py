@@ -1,16 +1,17 @@
 from django.shortcuts import render, redirect # (redirect- функция переадрисации)
-from .models import Articles 
+from .models import Articles
 
 from django.http import Http404, HttpResponseRedirect
 from django.utils import timezone
 
 # Create your views here.
-#Все новости
 def news_home(request):   # Новости
 	search_news_list = []
+	cheak_list_for_blank_field_my_photo = []
 	error = ""
-	if request.method == 'POST':  # реагирует на POST запрос
-		search_news_list = Articles.objects.filter(title__startswith = request.POST['news']) # Поиск новостей
+	index = 0
+	if request.method == 'POST':
+		search_news_list = Articles.objects.filter(title__startswith = request.POST['news']) # Поиск
 		search_news_list = search_news_list.order_by('date')	
 		if len(search_news_list) == 0:
 			error = "По вашему запросу ничего не найдено"
@@ -18,19 +19,30 @@ def news_home(request):   # Новости
 	length = len(search_news_list)	
 	object_all = Articles.objects.all()
 	articles_list = Articles.objects.order_by('-date')
-	
-	
-
+	#проверка на пустые картинки
+	# i = 0
+	# for e in articles_list:
+	# 	try:
+	# 		if e.my_photo.url:
+	# 			continue
+	# 	except:
+	# 		cheak_list_for_blank_field_my_photo.append(i)
+	# 	i += 1
+		
 	data = {
 		'articles_list': articles_list ,
 		'length': length ,
 		'z': request.user ,
 		'search_news_list': search_news_list ,
 		'error': error ,
+		
+		
 	}
 
 	return render(request, 'news/news_home.html', data)
-#просмотр отдельной статьи
+
+	
+
 def detailview(request, articles_id):
 	try:
 		a = Articles.objects.get(id = articles_id)
@@ -70,11 +82,13 @@ def delete_article(request, articles_id3):
 		raise Http404("Статья не найдена")			
 		
 		
-#Создание статьи		
+		
 def create(request):
 	a = ''
+	error = ""
 	if request.method == 'POST':
 		a = request.POST["file"]
+		
 		create_article = Articles(id_user = request.user.id, 
 								  title = request.POST["title"],
 								  anons = request.POST["anons"],
@@ -83,9 +97,11 @@ def create(request):
 								  date = timezone.datetime.now() 						
 								)	
 		create_article.save()	
-
+		
+				
 	data = {
-		"a": a
+		"a": a ,
+		"error": error ,
  	}	
 	
 
