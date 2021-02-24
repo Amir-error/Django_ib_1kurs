@@ -13,7 +13,7 @@
 		{{ error }}<br>
 		{% if length == 0 %}
 			{% for e in articles_list %}
-				<img src="{{ e.my_photo.url }}"><br>
+				<img width="100px" src="{{ e.my_photo.url }}"><br>
 				<a href="{% url 'news:detailview' e.id %}">{{ e.title }}</a><br>
 				
 			{% endfor %}
