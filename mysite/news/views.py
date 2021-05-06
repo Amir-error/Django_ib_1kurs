@@ -11,6 +11,7 @@ def news_home(request):   # Новости
 	error = ""
 	index = 0
 	if request.method == 'POST':
+		#Поиск из БД
 		search_news_list = Articles.objects.filter(title__startswith = request.POST['news']) # Поиск
 		search_news_list = search_news_list.order_by('date')	
 		if len(search_news_list) == 0:
@@ -18,17 +19,9 @@ def news_home(request):   # Новости
 		
 	length = len(search_news_list)	
 	object_all = Articles.objects.all()
-	articles_list = Articles.objects.order_by('-date')
-	#проверка на пустые картинки
-	# i = 0
-	# for e in articles_list:
-	# 	try:
-	# 		if e.my_photo.url:
-	# 			continue
-	# 	except:
-	# 		cheak_list_for_blank_field_my_photo.append(i)
-	# 	i += 1
-		
+	articles_list = Articles.objects.order_by('-date')  #Достаем из бдшки все записи в порядке убывания!!!!!!
+	
+	#Эти переменные будут доступны для html страницы	
 	data = {
 		'articles_list': articles_list ,
 		'length': length ,
