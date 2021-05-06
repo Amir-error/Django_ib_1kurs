@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect # (redirect- функция переадрисации)
-from .models import Articles
+from .models import Articles #импортируем нашу модель(БД)
 
 from django.http import Http404, HttpResponseRedirect
 from django.utils import timezone
